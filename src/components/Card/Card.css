@@ -1,0 +1,24 @@
+.Card {
+    height: auto;
+    width: auto;
+    background-color: aqua;
+
+    border-radius: 2vmin;
+    border: 1px black;
+    box-shadow: 2px 2px lightgray;
+
+    position: relative;
+    margin: auto;
+}
+
+.Card p {
+    font-size: 100%;
+    width: 90%;
+    padding: auto;
+    margin: auto;
+    position: relative;
+
+    /* white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden; */
+}
