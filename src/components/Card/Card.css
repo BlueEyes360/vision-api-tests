@@ -4,11 +4,11 @@
     background-color: aqua;
 
     border-radius: 2vmin;
-    border: 1px black;
     box-shadow: 2px 2px lightgray;
 
     position: relative;
-    margin: auto;
+    margin: 5vmax;
+    padding: 2vmax;
 }
 
 .Card p {

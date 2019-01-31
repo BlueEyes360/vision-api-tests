@@ -1,11 +1,20 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 
+import {FIREBASE_BASE_URL} from '../../APIKeys';
+
+let FirebaseDataInstance = axios.create({
+    baseURL: FIREBASE_BASE_URL,
+    'Access-Control-Allow-Origin': '*'
+});
+
 class ProcessImages extends Component {
+
     state = {
         data: 0,
         count: 0,
     }
+
 
     OutputDataHandler = () => {
         let beginningCount = this.state.count;
@@ -13,8 +22,8 @@ class ProcessImages extends Component {
         // for( let i = 1; i <= 10; i++)
         // {
         let singleImageData = this.props.data;
-        console.log(this.props.data);
-        console.log(singleImageData);
+        // console.log(this.props.data);
+        // console.log(singleImageData);
         //     // console.log(singleImageData);
         //     if((singleImageData.hasOwnProperty("title") && singleImageData.title !== null)
         //     && (singleImageData.hasOwnProperty("provenance") && singleImageData.provenance !== null)
@@ -29,13 +38,14 @@ class ProcessImages extends Component {
     }
 
     PostImageToServer = (imageData, currentCount) => {
-        axios.put("https://noble-maxim-217223.firebaseio.com/vision_tests/" + currentCount + ".json", imageData)
+        // FirebaseDataInstance.put("/vision_tests/" + currentCount + ".json", imageData)
+        FirebaseDataInstance.put(this.props.path + "/" + currentCount + ".json", imageData)
         .then(response => {
             let newCount = this.state.count + 1;
             this.setState({count: newCount});
             this.IncrementServerCount();
-            console.log("PITS");
-            console.log(response);
+            // console.log("PITS");
+            // console.log(response);
         })
         .catch(function (error) {
             console.log(error);
@@ -44,11 +54,11 @@ class ProcessImages extends Component {
     }
 
     GetServerCount = () => {
-        axios.get("https://noble-maxim-217223.firebaseio.com/vision_tests/count.json")
+        FirebaseDataInstance.get(this.props.path + "/count.json")
         .then(response => {
             this.setState({count: response.data});
-            console.log("GSC");
-            console.log(response);
+            // console.log("GSC");
+            // console.log(response);
             this.OutputDataHandler();
         })
         .catch(function (error) {
@@ -58,10 +68,10 @@ class ProcessImages extends Component {
 
     IncrementServerCount = () => {
         let currentCount = this.state.count;
-        axios.put("https://noble-maxim-217223.firebaseio.com/vision_tests/count.json", currentCount)
+        FirebaseDataInstance.put(this.props.path + "/count.json", currentCount)
         .then(response => {
-            console.log("ISC");
-            console.log(response);
+            // console.log("ISC");
+            // console.log(response);
         })
         .catch(function (error) {
             console.log(error);
@@ -77,9 +87,9 @@ class ProcessImages extends Component {
     render() {
 
         return (
-            <div>
+            <>
 
-            </div>
+            </>
         )
 
     }

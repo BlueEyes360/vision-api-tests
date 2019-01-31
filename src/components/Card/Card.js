@@ -6,6 +6,10 @@ const Card = (props) => {
 
     let info = <p>{JSON.stringify((props.data), undefined, 8)}</p>
 
+    let separateCards = Array.from(JSON.stringify(props.data));
+    separateCards = separateCards.map((element, index) => <Card data={element} key={index} />)
+    // let infoobject = props.data.map((element, index) => <Card data={element} key={index} /> )
+
     // const createCard = () => {
 
     //     labelInfo = props.data.labelAnnotations.map((x, index) =>
@@ -25,6 +29,8 @@ const Card = (props) => {
         <div className="Card">
             {/* <p>Type: Label Annotations</p> */}
             {info}
+            {/* {separateCards} */}
+            {/* {infoobject} */}
         </div>
     )
 }
